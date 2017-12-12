@@ -7,7 +7,7 @@
 ## UPDATED 17.12.09
 
 # Set working directory
-setwd('/Users/gavinmcnicol/Dropbox/SOIL GHG Ryals/Data/3 May 2017/Round 2 and 3 Reruns with Full N2O High CO2 CH4/')
+setwd('/Users/gavinmcnicol/Dropbox/SOIL GHG Ryals/Data/3 May 2017/Round 2 and 3 Reruns with Full N2O High CO2 CH4/CSVs from  GC output')
 
 ## Read in csv file
 data <- read.csv(file.choose())
@@ -54,8 +54,10 @@ data2 <- as.data.frame(cbind(ghg.co2, ghg.ch4, c(rep(NA,diff_l),ghg.n2o)))
 colnames(data2) <- c('CO2','CH4','N2O')
 
 #write csv and save in new folder
-write.csv(data2,'/Users/gavinmcnicol/Dropbox/SOIL GHG Ryals/Data/3 May 2017/Round 2 and 3 Reruns with Full N2O High CO2 CH4/Round 2 GHG Reprocessed/170707_Feb2017.csv')
+write.csv(data2,'/Users/gavinmcnicol/Dropbox/SOIL GHG Ryals/Data/3 May 2017/Round 2 and 3 Reruns with Full N2O High CO2 CH4/Round 2 GHG Reprocessed/Extracted data/170707_Feb2017.csv')
 
+# Set working directory
+setwd('/Users/gavinmcnicol/Dropbox/SOIL GHG Ryals/Data/3 May 2017/Round 2 and 3 Reruns with Full N2O High CO2 CH4/Realigned data')
 
 # read in data now that order is standardized so std.vector will be correct
 ## Read in csv file
@@ -95,12 +97,11 @@ ghg.ch4.cor[which(ghg.ch4.cor > 100)] <- ghg.ch4.cor[which(ghg.ch4.cor > 100)]*m
 
 ghg.n2o.cor <- as.numeric(as.character(data$N2O[-std.vector]))*mean.k.n2o
 
-
 # combine data into frame
 data2 <- as.data.frame(cbind(ghg.co2.cor, ghg.ch4.cor, ghg.n2o.cor))
 #data2 <- as.data.frame(cbind(ghg.co2.cor, ghg.ch4.cor,c(ghg.n2o.cor,rep(NA,abs(diff_l)))))
 colnames(data2) <- c('CO2','CH4','N2O')
 
 #write csv and save in new folder
-write.csv(data2,'/Users/gavinmcnicol/Dropbox/SOIL GHG Ryals/Data/3 May 2017/Round 2 and 3 Reruns with Full N2O High CO2 CH4/Round 2 GHG Reprocessed/170707_Feb2017_ppm_cor.csv')
+write.csv(data2,'/Users/gavinmcnicol/Dropbox/SOIL GHG Ryals/Data/3 May 2017/Round 2 and 3 Reruns with Full N2O High CO2 CH4/Round 2 GHG Reprocessed/Corrected data/170707_Feb2017_ppm_cor.csv')
 
