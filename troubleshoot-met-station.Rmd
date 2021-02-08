@@ -1,0 +1,49 @@
+---
+title: "Troubleshoot Last 6 Months"
+author: "Gavin McNicol"
+date: "2/8/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load libraries:
+```{r}
+library(tidyverse)
+```
+
+Read in last 6 months of met data:
+
+```{r}
+list.files(path  = "data/")
+```
+
+Read in last 6 months:
+
+```{r}
+met <- read.csv("data/2020_data_2021_02_08_15_59_21_UTC_1.csv") %>% 
+  mutate(Date = as.POSIXct(Date, format = "%y/%m/%d %H:%M:%S"))
+met
+```
+Look at names:
+
+```{r}
+names(met)
+names(met) <- c("Row", "Date", "WindSpeed", "GustSpeed", "WindDirection",
+                "Rain", "AirTemperature", "RelativeHumidity", "DewPoint",
+                "AirPressure")
+met
+```
+Make quick plots of all variables
+
+```{r}
+met %>% 
+  gather(key = "measurement", "value", 3:10) %>% 
+  mutate(measurement = factor(measurement), value = as.double(value)) %>% 
+  ggplot(aes(Date, value)) +
+  geom_line() +
+  facet_wrap(~measurement, ncol = 2, scales = 'free')
+```
+
