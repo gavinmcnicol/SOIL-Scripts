@@ -40,8 +40,9 @@ Make quick plots of all variables
 
 ```{r}
 met %>% 
+  mutate(AirPressure = as.numeric(str_remove(AirPressure, ","))) %>% 
   gather(key = "measurement", "value", 3:10) %>% 
-  mutate(measurement = factor(measurement), value = as.double(value)) %>% 
+  mutate(measurement = factor(measurement), value = as.numeric(value)) %>% 
   ggplot(aes(Date, value)) +
   geom_line() +
   facet_wrap(~measurement, ncol = 2, scales = 'free')
